@@ -93,7 +93,98 @@ const materias = [
   resumenes: ["R15", "R16"],
   videos: ["V46", "V47", "V48"],
   bibliografia: []
-  }
+  },
+  {
+    id: "REDES2",
+    nombre: "Comunicación y Redes 2",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "ING2",
+    nombre: "Ingeniería de Software 2",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "DISCRETA",
+    nombre: "Matemática Discreta",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "ALGEBRA",
+    nombre: "Álgebra",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "LF",
+    nombre: "Lenguajes Formales",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "ALGORITMOS",
+    nombre: "Algoritmos",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "TA",
+    nombre: "Tecnología Aplicada",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "POO1",
+    nombre: "Programación con Objetos 1",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "POO2",
+    nombre: "Programación con Objetos 2",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "UCYS",
+    nombre: "UCYS",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "AM1",
+    nombre: "Análisis Matemático 1",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "AM2",
+    nombre: "Análisis Matemático 2",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+},
+{
+    id: "BDD2",
+    nombre: "Base de Datos 2",
+    resumenes: ["R09", "R10"],
+    videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
+    bibliografia: ["B21", "B22"]
+}
 ];
 
 const resumenes = [
@@ -236,7 +327,7 @@ const resolvers = {
   Materia: {
     resumenes: (materia) => resumenes.filter(r => materia.resumenes.includes(r.id)),
     videos: (materia) => {
-      const allVideos = [VideosRedes, VideosBDD1, VideosSO1, VideosAC1, VideosAC2, VideosING1].flat();
+      const allVideos = [VideosRedes, VideosBDD1, VideosSO1, VideosAC1, VideosAC2, VideosING1,VideosAPD, VideosPROB].flat();
       return allVideos.filter(v => materia.videos.includes(v.id));
     },
     bibliografia: (materia) => bibliografia.filter(b => materia.bibliografia.includes(b.id))
