@@ -6,9 +6,11 @@ const typeDefs = `#graphql
   type Materia {
     id: ID!
     nombre: String!
+    descripcion: String #
     resumenes: [Resumen!]!
     videos: [Video!]
     bibliografia: [Bibliografia!]
+    visualizaciones: Int # <-- AGREGAR ESTO (debe ser un entero)
   }
    
   type Resumen {
@@ -34,6 +36,10 @@ const typeDefs = `#graphql
     materias: [Materia!]!
     materiaPorId(id: ID!): Materia
   }
+    type Mutation {
+  # Recibe el ID de la materia, le suma 1 en la base de datos y devuelve la materia actualizada
+  registrarVisualizacion(materiaId: ID!): Materia!
+}
 `;
 
 // 2. Datos en Memoria (Base de Datos Dummy)
@@ -41,6 +47,7 @@ const materias = [
   { 
     id: "BDD1",
     nombre: "Base de Datos 1",
+    descripcion: "Introducción al diseño, modelado y consultas de bases de datos relacionales.",
     resumenes: ["R03", "R04"],
     videos: ["V07", "V08", "V09", "V10", "V11", "V12", "V13"],
     bibliografia: ["B08", "B09", "B10", "B11", "B12", "B13"]
@@ -48,6 +55,7 @@ const materias = [
   {
     id: "AC1",
     nombre: "Arquitectura de Computadoras 1",
+    descripcion: "Introducción a los principios de diseño y arquitectura de sistemas computacionales.",
     resumenes: ["R05", "R06"],
     videos: ["V21", "V22", "V23", "V24", "V25", "V26", "V27", "V28", "V29"],
     bibliografia: ["B14", "B15", "B16"]
@@ -55,6 +63,7 @@ const materias = [
   {
     id: "REDES1",
     nombre: "Comunicación y Redes 1",
+    descripcion: "Introducción, interconexiones físicas y principios de comunicación y redes de computadoras.",
     resumenes: ["R01", "R02"],
     videos: ["V01", "V02", "V03", "V04", "V05", "V06"],
     bibliografia: ["B17", "B18"]
@@ -62,6 +71,7 @@ const materias = [
   {
     id: "ING1",
     nombre: "Ingeniería de Software 1",
+    descripcion: "Introducción a los principios y prácticas en el ciclo de vida de desarrollo de software",
     resumenes: ["R11", "R12"],
     videos: ["V36", "V37", "V38", "V39", "V40", "V41", "V42"],
     bibliografia: ["B01", "B02", "B03"]
@@ -69,6 +79,7 @@ const materias = [
   {
     id: "AC2",
     nombre: "Arquitectura de Computadoras 2",
+    descripcion: "Profundización en temas avanzados de arquitectura de computadoras, como ciclos de captación, buses, interrupciones y ALU.",
     resumenes: ["R07", "R08"],
     videos: ["V30", "V31", "V32", "V33", "V34", "V35"],
     bibliografia: ["B19", "B20"]
@@ -76,6 +87,7 @@ const materias = [
   {
     id: "SO1",
     nombre: "Sistemas Operativos 1",
+    descripcion:"Principios de sistemas operativos, gestión de procesos, memoria y archivos.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -83,20 +95,23 @@ const materias = [
   {
     id: "PROB",
     nombre: "Problemática regional",
-  resumenes: ["R13", "R14"],
-  videos: ["V43", "V44", "V45"],
-  bibliografia: ["B04", "B05", "B06", "B07", "B08"]
+    descripcion: "Identifiación del espacio urbano, Análisis de problemas sociales y económicos en contextos regionales.",
+    resumenes: ["R13", "R14"],
+    videos: ["V43", "V44", "V45"],
+    bibliografia: ["B04", "B05", "B06", "B07", "B08"]
   },
   {
     id: "APD",
     nombre: "Análisis y producción del discurso",
-  resumenes: ["R15", "R16"],
-  videos: ["V46", "V47", "V48"],
-  bibliografia: []
+    descripcion: "Análisis de textos, recursos linguisticos y desarrollo de habilidades de comunicación académica y profesional.",
+    resumenes: ["R15", "R16"],
+    videos: ["V46", "V47", "V48"],
+    bibliografia: []
   },
   {
     id: "REDES2",
     nombre: "Comunicación y Redes 2",
+    descripcion: "Profundización en temas avanzados de comunicación y redes, como protocolos, Modelo OSI seguridad y administración de redes.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -104,6 +119,7 @@ const materias = [
 {
     id: "ING2",
     nombre: "Ingeniería de Software 2",
+    descripcion: "Profundización en temas avanzados de ingeniería de software, desarrollo enfocado en la primer etapa INGENIERÍA DE REQUISITOS",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -111,6 +127,7 @@ const materias = [
 {
     id: "DISCRETA",
     nombre: "Matemática Discreta",
+    descripcion: "Introducción a los conceptos fundamentales de la matemática discreta, incluyendo lógica, teoría de conjuntos, combinatoria y grafos.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -118,6 +135,7 @@ const materias = [
 {
     id: "ALGEBRA",
     nombre: "Álgebra",
+    descripcion: "Introducción a los conceptos fundamentales del álgebra Y Geometría analítica, incluyendo estructuras algebraicas, ecuaciones, sistemas de ecuaciones, matrices,vectores y cónicas.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -125,6 +143,7 @@ const materias = [
 {
     id: "LF",
     nombre: "Lenguajes Formales",
+    descripcion: "Introducción a los conceptos fundamentales de los lenguajes formales, incluyendo gramáticas, autómatas, expresiones regulares, máquina de Turing y teoría de la compilación.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -132,6 +151,7 @@ const materias = [
 {
     id: "ALGORITMOS",
     nombre: "Algoritmos",
+    descripcion: "Introducción a los conceptos fundamentales de los algoritmos, incluyendo complejidad, diseño y análisis, estructuras, flujo y programación estructurada de datos.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -139,6 +159,7 @@ const materias = [
 {
     id: "TA",
     nombre: "Tecnología Aplicada",
+    descripcion: "Introducción a los principios y prácticas en el desarrollo de tecnologías aplicadas, conceptos básicos electricos.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -146,6 +167,7 @@ const materias = [
 {
     id: "POO1",
     nombre: "Programación con Objetos 1",
+    descripcion: "Introducción a los conceptos fundamentales de la programación orientada a objetos, incluyendo encapsulamiento, herencia y polimorfismo.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -153,6 +175,7 @@ const materias = [
 {
     id: "POO2",
     nombre: "Programación con Objetos 2",
+    descripcion: "Profundización en los conceptos de programación orientada a objetos, incluyendo diseño de clases, patrones de diseño y buenas prácticas, algoritmos de recorridos, casos de prueba, complejidad y  pensamiento computacional .",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -160,6 +183,7 @@ const materias = [
 {
     id: "UCYS",
     nombre: "UCYS",
+    descripcion: "Introducción a los conceptos fundamentales de la cultura y sociedad, incluyendo historia, sociología, antropología, filosofía y ética, influyente sobre las universidades y la sociedad en general.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -167,6 +191,7 @@ const materias = [
 {
     id: "AM1",
     nombre: "Análisis Matemático 1",
+    descripcion: "Introducción a los conceptos fundamentales del análisis matemático, incluyendo límites, continuidad, derivadas e integrales de funciones de una variable en el plano.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -174,6 +199,7 @@ const materias = [
 {
     id: "AM2",
     nombre: "Análisis Matemático 2",
+    descripcion: "Profundización en los conceptos del análisis matemático, incluyendo limites y tipos de derivadas de doble variable, integrales múltiples, series de Taylor, ecuaciones diferenciales y transformadas en el espacio",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -181,6 +207,7 @@ const materias = [
 {
     id: "BDD2",
     nombre: "Base de Datos 2",
+    descripcion: "Profundización en los conceptos de bases de datos, incluyendo diseño avanzado, optimización de consultas, ocurrencias, transacciones, ACID  y seguridad.",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
     bibliografia: ["B21", "B22"]
@@ -325,13 +352,30 @@ const resolvers = {
     materiaPorId: (_, { id }) => materias.find(m => m.id === id)
   },
   Materia: {
+    descripcion: (materia) => materia.descripcion,
     resumenes: (materia) => resumenes.filter(r => materia.resumenes.includes(r.id)),
     videos: (materia) => {
       const allVideos = [VideosRedes, VideosBDD1, VideosSO1, VideosAC1, VideosAC2, VideosING1,VideosAPD, VideosPROB].flat();
       return allVideos.filter(v => materia.videos.includes(v.id));
     },
     bibliografia: (materia) => bibliografia.filter(b => materia.bibliografia.includes(b.id))
+  },
+  
+ // Ejemplo si tenés un array local llamado "materias"
+Mutation: {
+  registrarVisualizacion: (_, { materiaId }) => {
+    const materia = materias.find(m => m.id === materiaId);
+    if (!materia) throw new Error("Materia no encontrada");
+    
+    // Si el campo no existe en el objeto local, lo inicializa en 0 antes de sumar
+    if (materia.visualizaciones === undefined) {
+      materia.visualizaciones = 0;
+    }
+    
+    materia.visualizaciones += 1; // Suma 1
+    return materia; // Devuelve el objeto modificado
   }
+} 
 };
 
 // 4. Instancia del servidor
