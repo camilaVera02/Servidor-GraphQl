@@ -188,7 +188,7 @@ const VideosPROB = [
 const VideosAPD = [
   { id: "V46", titulo: "El texto científico", url: "https://youtu.be/wimisyJjjhQ?si=OJ29OGUfEms9o22R" },
   { id: "V47", titulo: "Texto argumentativo", url: "https://youtu.be/CdrNwcg50l8?si=tPhfP0c8vShfXlnr" },
-  { id: "V48", titulo: "Texto explicativo", url: "https://youtu.be/aK52RxV2XuI?si=5fgUyBg-KAcPARHj" },
+  { id: "V48", titulo: "Texto explicativo", url: "https://youtu.be/aK52RxV2XuI?si=5fgUyBg-KAcPARHj" }
   
 ];
 
@@ -221,7 +221,7 @@ const bibliografia = [
 { id: "B20", titulo: "Principios de Arquitectura de Computadoras  ", autor: " Pearson Murdoc, Miles y Heuring, Vincent", editorial: " 2002 " },
 //SO1
 { id: "B21", titulo: "Operating System Concepts.", autor: "Silberschatz, Galvin, Gagne. ", editorial: "10th Edition. Wiley" },
-{ id: "B22", titulo: "Sistema Operativo LINUX.  Teoría y Práctica", autor: "Allende, Gibellini, Sánchez, Serna", editorial: "2da Ed. edUTecNe " },
+{ id: "B22", titulo: "Sistema Operativo LINUX.  Teoría y Práctica", autor: "Allende, Gibellini, Sánchez, Serna", editorial: "2da Ed. edUTecNe " }
 
 ];
 
