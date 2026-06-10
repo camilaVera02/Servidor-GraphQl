@@ -43,21 +43,21 @@ const materias = [
     nombre: "Base de Datos 1",
     resumenes: ["R03", "R04"],
     videos: ["V07", "V08", "V09", "V10", "V11", "V12", "V13"],
-    bibliografia: []
+    bibliografia: ["B08", "B09", "B10", "B11", "B12", "B13"]
   },
   {
     id: "AC1",
     nombre: "Arquitectura de Computadoras 1",
     resumenes: ["R05", "R06"],
     videos: ["V21", "V22", "V23", "V24", "V25", "V26", "V27", "V28", "V29"],
-    bibliografia: []
+    bibliografia: ["B14", "B15", "B16"]
   },
   {
     id: "REDES1",
     nombre: "Comunicación y Redes 1",
     resumenes: ["R01", "R02"],
     videos: ["V01", "V02", "V03", "V04", "V05", "V06"],
-    bibliografia: []
+    bibliografia: ["B17", "B18"]
   },
   {
     id: "ING1",
@@ -71,14 +71,28 @@ const materias = [
     nombre: "Arquitectura de Computadoras 2",
     resumenes: ["R07", "R08"],
     videos: ["V30", "V31", "V32", "V33", "V34", "V35"],
-    bibliografia: []
+    bibliografia: ["B19", "B20"]
   },
   {
     id: "SO1",
     nombre: "Sistemas Operativos 1",
     resumenes: ["R09", "R10"],
     videos: ["V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21"],
-    bibliografia: []
+    bibliografia: ["B21", "B22"]
+  },
+  {
+    id: "PROB",
+    nombre: "Problemática regional",
+  resumenes: ["R13", "R14"],
+  videos: ["V43", "V44", "V45"],
+  bibliografia: ["B04", "B05", "B06", "B07", "B08"]
+  },
+  {
+    id: "APD",
+    nombre: "Análisis y producción del discurso",
+  resumenes: ["R15", "R16"],
+  videos: ["V46", "V47", "V48"],
+  bibliografia: []
   }
 ];
 
@@ -87,14 +101,21 @@ const resumenes = [
   { id: "R02", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1fv2-M_vL9lRBS1-EQmuwhdnSlDtmfHD2/view?usp=drive_link" },
   { id: "R03", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/1H9suioMZMMxVxzEua8VEUxx7gQWhOG_h/view?usp=drive_link" },
   { id: "R04", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1cmHWgNQMerV8TDv5cwsOPQA67rNtYBe-/view?usp=drive_link" },
-  { id: "R05", titulo: "Parte 1", pdfUrl: "---" },
-  { id: "R06", titulo: "Parte 2", pdfUrl: "---" },
+  { id: "R05", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/1Ecramee6XHe5tEwgzmFrWi2X9bEr_DfP/view?usp=drive_link" },
+  { id: "R06", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1h9djK6cHWa7wQlh5tqw6M3TTa6tQ4gt6/view?usp=drive_link" },  //arqui1
   { id: "R07", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/14bUuiQIzdXPKmMcWo_5-J5FnaeOFLDCA/view?usp=drive_link" },
   { id: "R08", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1Xe8n_RRMuf2HRuJbOokq7TAmk-0VX5pJ/view?usp=drive_link" },
   { id: "R09", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/15ie-kXk7FlPLEoCmrVFrV0aMhX98cIpu/view?usp=drive_link" },
   { id: "R10", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1ir2wqPAERLZUDMpuXJ_1M3K7iC3V0OWL/view?usp=drive_link" },
-  { id: "R11", titulo: "Parte 1", pdfUrl: "---" },
-  { id: "R12", titulo: "Parte 2", pdfUrl: "---" }
+  { id: "R11", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/1rizXkeYPf-tkTo5X1XCSKHJW4o7qTTuN/view?usp=drive_link" },
+  { id: "R12", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1sqoG0IQEDa43KGYChX5-K_u1apMjUa40/view?usp=drive_link" }, //ing
+  { id: "R13", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/1GxIMgzxCb_iWGtN3ez3R47gQGFPCSvhB/view?usp=drive_link" },
+  { id: "R14", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1xYtli6J5begPurRUyWH7RE158k10nfCD/view?usp=drive_link" },
+   { id: "R15", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/1zjKkxVzA_f-KB3HN8ItMAJkKVOi2MADb/view?usp=drive_link" },
+{ id: "R16", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1pdRTekOoe8WKbyKx2Ihu9GNZkomW5eS_/view?usp=drive_link" },
+
+  
+  
 ];
 
 const VideosRedes = [
@@ -158,11 +179,53 @@ const VideosING1 = [
   { id: "V42", titulo: "Ética", url: "https://youtu.be/mtyS2z3l_OU?si=tei1AO4Qky28Ly3S" }
 ];
 
+const VideosPROB = [
+  { id: "V43", titulo: "Modelo ISI", url: "https://youtu.be/8xGH-lkW04k?si=v2mnTKDV10fEx8iK" },
+  { id: "V44", titulo: "Modelo Neoliberal", url: "https://youtu.be/sa79qPlALfU?si=2mb2_0XvkhdjRGT1" },
+  { id: "V45", titulo: "Modelo agroexportador", url: "https://youtu.be/Bc9e3KAecbo?si=9eXhSKRfhJJRXxR3" }
+];
+
+const VideosAPD = [
+  { id: "V46", titulo: "El texto científico", url: "https://youtu.be/wimisyJjjhQ?si=OJ29OGUfEms9o22R" },
+  { id: "V47", titulo: "Texto argumentativo", url: "https://youtu.be/CdrNwcg50l8?si=tPhfP0c8vShfXlnr" },
+  { id: "V48", titulo: "Texto explicativo", url: "https://youtu.be/aK52RxV2XuI?si=5fgUyBg-KAcPARHj" },
+  
+];
+
 const bibliografia = [
+  //ing software1
   { id: "B01", titulo: "Ingeniería del Software: Un enfoque práctico", autor: "Roger S. Pressman", editorial: "----" },
   { id: "B02", titulo: "Ingeniería del Software", autor: "Ian Sommerville", editorial: "----" },
-  { id: "B03", titulo: "El proceso Unificado de desarrollo de software", autor: "Ivar Jacobson, Grady Booch, James Rumbaugh", editorial: "----" }
+  { id: "B03", titulo: "El proceso Unificado de desarrollo de software", autor: "Ivar Jacobson, Grady Booch, James Rumbaugh", editorial: "----" },
+  //problematica regional
+  { id: "B04", titulo: "Apunte del INDEC ¿Qué es el Gran Buenos Aires? 2003.", autor: "Bertoncello Rodolfo", editorial: " vol. 1, N. O, Julio, 2004" },
+  { id: "B05", titulo: " Memoria Verde. Historia Ecológica de la Argentina", autor: "Brailovsky Antonio Elio, Foguelman Dina", editorial: "Ed. Sudamericana. Décima Edición 1998. " },
+  { id: "B06", titulo: "La Argentina Ambiental", autor: "Diana Duràn", editorial: "----" },
+  { id: "B07", titulo: "Introducción al estudio de los recursos naturales", autor: " Antonio Elio Brailovsky ", editorial: "----" },
+  //base de datos 1
+  { id: "B08", titulo: "Delitos ecológicos", autor: "Mauricio Héctor Libster", editorial: " 2º edición. Ed. Depalma2000. " },
+  { id: "B09", titulo: "Fundamentos de Base de Datos", autor: "Silberschatz - Korth", editorial: " 5° Edición. McGraw-Hill. 2006 " },
+   { id: "B10", titulo: "Sistemas de Gestión de Base de Datos", autor: "Ramakrishnan, R. - Gehrke, R", editorial: "  3° Edición. McGraw-Hill. 2002 " },
+  { id: "B11", titulo: "Fundamentals of Database Systems.", autor: "Elmasri, R. - Navathe, S", editorial: "  6° Edición. Addison-Wesley. 2010." },
+   { id: "B12", titulo: "Database System: The Complete Book.", autor: "2nd Ed. Prentice-Hall. 2009", editorial: " 5o Edición. McGraw-Hill. 2006" },
+   { id: "B13", titulo: "Sistemas de Base de Datos", autor: "Thomas M. Connolly", editorial: "4ta Edición. Pearson Educación. 2005" },
+  //arqui1
+   { id: "B14", titulo: "Organización y Arquitectura de Computadoras", autor: "Stallings, William", editorial: "2006" },
+   { id: "B15", titulo: "Organización y Diseño de Computadoras", autor: "Patterson, Hennessy", editorial: "1995" },
+ { id: "B16", titulo: "Arquitectura de Computadoras", autor: "Parhami, Bhrooz", editorial: "2005" },
+ //redes 1
+  { id: "B17", titulo: "Comunicaciones : Una Introducción a las Redes Digitales de Transmisión de Datos y Señales Isócronas", autor: "Castro Lechtaler - Fusario", editorial: "1era Edición" },
+ { id: "B18", titulo: "comunicación y redes", autor: "william stalling", editorial: " 2005" },
+//arqui2
+{ id: "B19", titulo: "Organización y Arquitectura de Computadoras ", autor: "william stalling", editorial: " 2005" },
+{ id: "B20", titulo: "Principios de Arquitectura de Computadoras  ", autor: " Pearson Murdoc, Miles y Heuring, Vincent", editorial: " 2002 " },
+//SO1
+{ id: "B21", titulo: "Operating System Concepts.", autor: "Silberschatz, Galvin, Gagne. ", editorial: "10th Edition. Wiley" },
+{ id: "B22", titulo: "Sistema Operativo LINUX.  Teoría y Práctica", autor: "Allende, Gibellini, Sánchez, Serna", editorial: "2da Ed. edUTecNe " },
+
 ];
+
+
 
 // 3. Resolvers de GraphQL
 const resolvers = {
