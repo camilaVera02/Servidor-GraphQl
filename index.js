@@ -10,7 +10,7 @@ const typeDefs = `#graphql
     resumenes: [Resumen!]!
     videos: [Video!]
     bibliografia: [Bibliografia!]
-    visualizaciones: Int # <-- AGREGAR ESTO (debe ser un entero)
+    visualizaciones: Int # atributo que mantendrá el contador de las veces que e visualice y seleccióne esa materia
   }
    
   type Resumen {
@@ -36,13 +36,15 @@ const typeDefs = `#graphql
     materias: [Materia!]!
     materiaPorId(id: ID!): Materia
   }
-    type Mutation {
-  # Recibe el ID de la materia, le suma 1 en la base de datos y devuelve la materia actualizada
+    
+  # Recibe el ID de la materia, le suma 1 en la base de datos y devuelve la materia actualizada, todo esto con la mutation que está especificada en la linea 367
+    
+  type Mutation {
   registrarVisualizacion(materiaId: ID!): Materia!
 }
 `;
 
-// 2. Datos en Memoria (Base de Datos Dummy)
+// 2. Datos en Memoria 
 const materias = [
   { 
     id: "BDD1",
@@ -213,7 +215,7 @@ const materias = [
     bibliografia: ["B21", "B22"]
 }
 ];
-
+//urls a drive
 const resumenes = [
   { id: "R01", titulo: "Parte 1", pdfUrl: "https://drive.google.com/file/d/1O2PoqmJoVZc_2llUDsJH8XdXoJ6vTrX8/view?usp=drive_link" },
   { id: "R02", titulo: "Parte 2", pdfUrl: "https://drive.google.com/file/d/1fv2-M_vL9lRBS1-EQmuwhdnSlDtmfHD2/view?usp=drive_link" },
@@ -235,7 +237,7 @@ const resumenes = [
   
   
 ];
-
+//sección videoss
 const VideosRedes = [
   { id: "V01", titulo: "Medios de Transmisión 1", url: "https://youtu.be/V17j6i8p_J4?si=d5vWlBIZETGmUs4G" },
   { id: "V02", titulo: "Medios de Transmisión 2", url: "https://youtu.be/0WJ5zVzc3ZM?si=Gf4Tceg_u5Hhh_XP" },
@@ -309,7 +311,7 @@ const VideosAPD = [
   { id: "V48", titulo: "Texto explicativo", url: "https://youtu.be/aK52RxV2XuI?si=5fgUyBg-KAcPARHj" }
   
 ];
-
+//sección bibliografia
 const bibliografia = [
   //ing software1
   { id: "B01", titulo: "Ingeniería del Software: Un enfoque práctico", autor: "Roger S. Pressman", editorial: "----" },
@@ -347,21 +349,21 @@ const bibliografia = [
 
 // 3. Resolvers de GraphQL
 const resolvers = {
-  Query: {
+  Query: { //tenemos 2 tipos de querys, uno que devuelve toda la lista de materias, y otra que devuelve si hay coincidencias por id
     materias: () => materias,
     materiaPorId: (_, { id }) => materias.find(m => m.id === id)
-  },
+  },//en este resolvers conectamos cada atributo que debe devolver una materia con su correspondiente dato
   Materia: {
-    descripcion: (materia) => materia.descripcion,
-    resumenes: (materia) => resumenes.filter(r => materia.resumenes.includes(r.id)),
-    videos: (materia) => {
-      const allVideos = [VideosRedes, VideosBDD1, VideosSO1, VideosAC1, VideosAC2, VideosING1,VideosAPD, VideosPROB].flat();
-      return allVideos.filter(v => materia.videos.includes(v.id));
+    descripcion: (materia) => materia.descripcion, 
+    resumenes: (materia) => resumenes.filter(r => materia.resumenes.includes(r.id)), //filtra los url de drive que corresponden con el id actual
+    videos: (materia) => { //junta todos los type videos (son grupos de url a yt) en una unica lista
+    const allVideos = [VideosRedes, VideosBDD1, VideosSO1, VideosAC1, VideosAC2, VideosING1,VideosAPD, VideosPROB].flat();
+    return allVideos.filter(v => materia.videos.includes(v.id));// y devuelve aquella que coincida con el id actual
     },
     bibliografia: (materia) => bibliografia.filter(b => materia.bibliografia.includes(b.id))
   },
   
- // Ejemplo si tenés un array local llamado "materias"
+ // Busca la materia en la lista global por su ID
 Mutation: {
   registrarVisualizacion: (_, { materiaId }) => {
     const materia = materias.find(m => m.id === materiaId);
